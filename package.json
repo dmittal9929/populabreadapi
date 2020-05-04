@@ -7,6 +7,10 @@
     "start": "node src/index.js",
     "dev": "env-cmd -f ./config/dev.env nodemon src/index.js"
   },
+  "engines": {
+    "node": "8.11.4",
+    "npm": "5.6.0"
+  },
   "author": "Dhruv Mittal",
   "license": "ISC",
   "dependencies": {
