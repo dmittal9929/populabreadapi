@@ -7,11 +7,6 @@ try{
 catch (e) {
     console.log(e);
 }
-
-
-
-
-
 const enquiryEmail = ({name,contact_number,email_id,description,address})=>{
    try{
 
