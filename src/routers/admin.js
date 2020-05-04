@@ -12,15 +12,15 @@ const auth = require('../middleware/auth');
 // remove admin
 
 
-router.post('/admin/firstAdmin' ,async(req,res)=>{
-    const admin = new Admin(req.body);
-    try{
-        const user = await admin.save();
-        res.status(201).send(user)
-    }catch (e) {
-        res.status(500).send(e)
-    }
-});
+// router.post('/admin/firstAdmin' ,async(req,res)=>{
+//     const admin = new Admin(req.body);
+//     try{
+//         const user = await admin.save();
+//         res.status(201).send(user)
+//     }catch (e) {
+//         res.status(500).send(e)
+//     }
+// });
 
 router.post('/admin/newadmin',auth ,async(req,res)=>{
     const admin = new Admin(req.body);
