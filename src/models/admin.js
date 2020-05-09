@@ -52,7 +52,7 @@ adminSchema.pre( 'save',async function(next) {
 
 
 adminSchema.statics.findByCredentials = async (email,password)=>{
-    const user = await Admin.findOne({email : email});
+    const user = await Admin.findOne();
     if (!user){
         throw new Error("unable to login")
     }
