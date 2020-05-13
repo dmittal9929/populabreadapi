@@ -1,4 +1,6 @@
 const express = require('express');
+var cors = require('cors');
+
 
 require('./db/mongoose');
 const productRouter = require('./routers/products');
@@ -14,6 +16,7 @@ const collabUpdateRouter = require('./routers/collaborationipdate');
 const app = express();
 const PORT = process.env.PORT ;
 
+app.use(cors());
 app.use(express.json());
 app.use(productRouter);
 app.use(specialsRouter);
