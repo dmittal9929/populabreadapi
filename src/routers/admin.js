@@ -64,7 +64,7 @@ router.post('/admin/logoutAll', auth  ,async (req,res)=>{
     req.admin.tokens = [];
     try{
         await req.admin.save();
-        res.send()
+        res.send({"msg":"successful"})
     }catch (e) {
         res.status(400).send(e);
     }
