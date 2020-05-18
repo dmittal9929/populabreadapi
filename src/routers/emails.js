@@ -9,16 +9,22 @@ router.post('/enquiry',async (req,res)=>{
         await enquiryEmail(req.body);
 
 
-        res.send();
+        res.send({"msg":"Recorded your response"});
     }
     catch (e) {
-        res.status(500).send({"error":e.message})
+        res.status(500).send({"err":"internal serer error"})
     }
 });
 
-router.post('/feedback',(req,res)=>{
-    feedback(req.body);
-    res.send();
+router.post('/feedback',async (req,res)=>{
+    try{
+        await feedback(req.body);
+        res.send({"msg":"Recorded your response"});
+    }
+    catch (e) {
+        res.status(500).send({"err":"internal serer error"})
+    }
+
 })
 
 

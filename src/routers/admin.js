@@ -25,7 +25,7 @@ const auth = require('../middleware/auth');
 router.post('/admin/newadmin',auth ,async(req,res)=>{
     const admin = new Admin(req.body);
     try{
-        const user = await admin.save()
+        const user = await admin.save();
         res.status(201).send(user)
     }catch (e) {
         res.status(500).send(e)
@@ -34,7 +34,7 @@ router.post('/admin/newadmin',auth ,async(req,res)=>{
 
 router.get('/admin/me',auth, async(req,res)=>{
     res.send(req.admin);
-})
+});
 
 router.post('/admin/login',async(req,res)=>{
     try{
