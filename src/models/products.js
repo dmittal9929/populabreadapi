@@ -7,7 +7,16 @@ const productSchema = new mongoose.Schema({
         unique : true
     },
     image:{
+        type : String,
+        required: true
+    },
+    description:{
         type : String
+    },
+    nvalue:{
+        type : String
+    },tag: {
+        type: String
     }
 },{
     timestamps: true
@@ -15,6 +24,6 @@ const productSchema = new mongoose.Schema({
 
 
 
-const Products = mongoose.model('products',productSchema)
+const Products = mongoose.model('products',productSchema);
 
-module.exports = Products
+module.exports = Products;

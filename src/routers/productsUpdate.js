@@ -7,6 +7,7 @@ const upload = require('../middleware/multermiddleware');
 const cloudinary = require('cloudinary').v2;
 const Datauri = require('datauri');
 const datauri = new Datauri();
+const datauri2 = new Datauri();
 const router = new express.Router();
 
 require('../middleware/cloudinaryConfiguration');
@@ -18,18 +19,25 @@ require('../middleware/cloudinaryConfiguration');
 
 
 
-
-
-router.post('/admin/product', auth, upload.single('image') , async (req,res)=>{
-    if (req.file){
+router.post('/admin/product', auth, upload.fields([{name: 'image'},{name:'nvalue'}]) , async (req,res)=>{
+    if (req.files){
         try{
-            //console.log(req.file.buffer);
-            await datauri.format('.jpeg',req.file.buffer)
-            const success = await cloudinary.uploader.upload(datauri.content);
-            //console.log(req.body);
+            const buffers = []
+            buffers.push(datauri.format('.jpeg',req.files['image'][0].buffer));
+            buffers.push(datauri2.format('.jpeg',req.files['nvalue'][0].buffer));
+            console.log(buffers[0]==buffers[1]);
+
+            const  promises = buffers.map(async buffer=>{
+                const data = await cloudinary.uploader.upload(buffer.content);
+                // mylinks.push(data);
+                return data;
+            });
+
+            const links = await Promise.all(promises);
             const product = new Products({
                 ...req.body,
-                image:success.url
+                image:links[0].url,
+                nvalue:links[1].url
             });
             await product.save();
             res.send(product);

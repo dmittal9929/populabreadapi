@@ -4,12 +4,14 @@ const router = new express.Router();
 
 
 router.get('/products' , async(req,res)=>{
+
     try{
-        const products = await Products.find({});
+        const products = await Products.find({"tag":req.query.tag});
         res.send(products)
     }catch (e) {
         res.status(500).send({error :e.message})
     }
 });
+
 
 module.exports = router;
